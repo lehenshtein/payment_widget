@@ -1,0 +1,15 @@
+<mat-form-field>
+  <div [ngClass]="{'no-error': date.valid && date.touched}">
+    <input matInput [matDatepicker]="dp" [min]="minDate" placeholder="Month and Year" [formControl]="date">
+    <span class="form-help-text" *ngIf="date.invalid && date.touched">
+      This date is incorrect
+    </span>
+  </div>
+  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp
+                  startView="multi-year"
+                  (yearSelected)="chosenYearHandler($event)"
+                  (monthSelected)="chosenMonthHandler($event, dp)"
+                  panelClass="example-month-picker">
+  </mat-datepicker>
+</mat-form-field>

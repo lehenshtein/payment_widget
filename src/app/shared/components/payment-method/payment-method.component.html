@@ -1,0 +1,13 @@
+<ng-container [formGroup]="formPaymentMethods">
+  <mat-radio-group
+    *ngIf="paymentMethods"
+    formControlName="method"
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    >
+    <mat-radio-button class="example-radio-button" *ngFor="let method of paymentMethods" [value]="method.id">
+      {{method.name}}
+      <img src="{{method.img_url}}" alt="{{method.id}}">
+    </mat-radio-button>
+  </mat-radio-group>
+</ng-container>

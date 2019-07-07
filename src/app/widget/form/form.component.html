@@ -1,4 +1,74 @@
-<section>
-  <mat-checkbox [(ngModel)]="checked">Checked</mat-checkbox>
-  <mat-checkbox [(ngModel)]="indeterminate">Indeterminate</mat-checkbox>
-</section>
+<div class="form-wrapper">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-country-selector formControlName="countriesForm"></app-country-selector>
+    <app-payment-method formControlName="paymentMethodForm"></app-payment-method>
+    <mat-form-field>
+      <div [ngClass]="{'no-error': form.get('name').valid && form.get('name').touched}">
+        <input
+          matInput
+          appOnlyChars
+          type="text"
+          placeholder="Your name"
+          formControlName="name"
+        >
+        <span class="form-help-text" *ngIf="form.get('name').invalid && form.get('name').touched">
+          <span *ngIf="form.get('name')['errors']['required']">This field cannot be empty</span>
+          <span *ngIf="form.get('name')['errors']['minlength'] && form.get('name')['errors']['minlength']['requiredLength']">
+          Name should be at least {{form.get('name')['errors']['minlength']['requiredLength']}} characters
+          </span>
+        </span>
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <div [ngClass]="{'no-error': form.get('cardNumber').valid && form.get('cardNumber').touched}">
+        <input
+          matInput
+          maxlength="16"
+          appOnlyNumbers
+          type="text"
+          class="form-control underlined"
+          placeholder="Card number"
+          formControlName="cardNumber"
+        >
+        <span class="form-help-text" *ngIf="form.get('cardNumber').invalid && form.get('cardNumber').touched">
+          <span *ngIf="form.get('cardNumber')['errors']['required']">Card number field cannot be empty</span>
+          <span *ngIf="form.get('cardNumber')['errors']['minlength'] && form.get('cardNumber')['errors']['minlength']['requiredLength']">
+            Card number should be at least {{form.get('cardNumber')['errors']['minlength']['requiredLength']}} numbers
+          </span>
+          <span *ngIf="form.get('cardNumber')['errors']['invalidNumber'] && !form.get('cardNumber')['errors']['minlength']">Card number is invalid</span>
+      </span>
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <div [ngClass]="{'no-error': form.get('cvv').valid && form.get('cvv').touched}">
+        <input
+          matInput
+          type="text"
+          maxlength="3"
+          appOnlyNumbers
+          class="form-control underlined"
+          placeholder="CVV code"
+          formControlName="cvv"
+        >
+        <span class="form-help-text" *ngIf="form.get('cvv').invalid && form.get('cvv').touched">
+            <span *ngIf="form.get('cvv')['errors']['required']">CVV code field cannot be empty</span>
+            <span *ngIf="form.get('cvv')['errors']['minlength'] && form.get('cvv')['errors']['minlength']['requiredLength']">
+              CVV code should be at least {{form.get('cvv')['errors']['minlength']['requiredLength']}} numbers
+            </span>
+        </span>
+      </div>
+    </mat-form-field>
+    <app-card-datepicker (datepickerDate)="datepickerDate($event)"></app-card-datepicker>
+    <div class="form-group">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="btn btn-block btn-primary"
+        [disabled]="form.invalid"
+      >
+        Pay
+      </button>
+    </div>
+  </form>
+</div>

@@ -5,6 +5,10 @@
 export const environment = {
   production: false
 };
+export const paymentwallUrl = 'https://api.paymentwall.com/api/';
+export const paymentwallProjectKey = 'f49186f0b461b784e7fbf374e24890cb';
+export const paymentwallSecretKey = 'dbe37359cdd1eb0c76d66a4aa1d42d3b';
+
 
 /*
  * For easier debugging in development mode, you can import the following file
