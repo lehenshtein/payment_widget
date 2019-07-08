@@ -5,9 +5,9 @@
     aria-labelledby="example-radio-group-label"
     class="example-radio-group"
     >
-    <mat-radio-button class="example-radio-button" *ngFor="let method of paymentMethods" [value]="method.id">
+    <mat-radio-button [checked]="i === 0" class="example-radio-button" *ngFor="let method of paymentMethods; let i = index" [value]="method.id">
       {{method.name}}
-      <img src="{{method.img_url}}" alt="{{method.id}}">
+      <img class="method-logo" src="{{method.img_url}}" alt="{{method.id}}">
     </mat-radio-button>
   </mat-radio-group>
 </ng-container>

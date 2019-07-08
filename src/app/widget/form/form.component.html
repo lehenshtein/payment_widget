@@ -26,7 +26,6 @@
           maxlength="16"
           appOnlyNumbers
           type="text"
-          class="form-control underlined"
           placeholder="Card number"
           formControlName="cardNumber"
         >
@@ -46,7 +45,6 @@
           type="text"
           maxlength="3"
           appOnlyNumbers
-          class="form-control underlined"
           placeholder="CVV code"
           formControlName="cvv"
         >
@@ -59,16 +57,34 @@
       </div>
     </mat-form-field>
     <app-card-datepicker (datepickerDate)="datepickerDate($event)"></app-card-datepicker>
-    <div class="form-group">
+    <div class="pay-field">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        class="btn btn-block btn-primary"
         [disabled]="form.invalid"
       >
         Pay
       </button>
+      <mat-form-field class="pay-field__small">
+      <input
+        matInput
+        type="number"
+        min="5"
+        step="1"
+        appOnlyNumbers
+        class="pay-field__input"
+        formControlName="amount"
+      >
+      </mat-form-field>
+      <mat-form-field class="pay-field__small">
+        <mat-label>Currency</mat-label>
+        <mat-select formControlName="currency">
+          <mat-option *ngFor="let currency of currencyList" [value]="currency.code">
+            {{currency.code}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </form>
 </div>

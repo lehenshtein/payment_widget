@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LuhnValidator} from '@app/shared/validators/luhn.validator';
+import {currencies} from '@app/shared/currencies';
 
 @Component({
   selector: 'app-form',
@@ -8,7 +9,9 @@ import {LuhnValidator} from '@app/shared/validators/luhn.validator';
   styleUrls: ['./form.component.sass']
 })
 export class FormComponent implements OnInit {
-  form: FormGroup;
+  @Output() onSuccess = new EventEmitter<boolean>();
+  public form: FormGroup;
+  public currencyList = currencies;
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -21,6 +24,8 @@ export class FormComponent implements OnInit {
       'cvv': new FormControl(null, [Validators.required, Validators.minLength(3)]),
       'countriesForm': new FormControl(''),
       'paymentMethodForm': new FormControl(''),
+      'amount': new FormControl('5'),
+      'currency': new FormControl('USD'),
 
     });
   }
@@ -28,6 +33,11 @@ export class FormComponent implements OnInit {
     this.form.setControl('date', date);
   }
   public onSubmit() {
-    console.log(this.form);
+    if (this.form.valid) {
+      this.onSuccess.emit(true);
+      console.log(this.form);
+      return;
+    }
+    this.onSuccess.emit(false);
   }
 }

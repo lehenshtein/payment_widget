@@ -1,1 +1,5 @@
-<app-form></app-form>
+<div class="widget">
+  <app-form (onSuccess)="onSuccess($event)"></app-form>
+  <div class="widget__block widget__block--success" *ngIf="formSuccess">Success</div>
+  <div class="widget__block widget__block--error" *ngIf="formError">Error</div>
+</div>

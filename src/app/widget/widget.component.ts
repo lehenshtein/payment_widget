@@ -9,6 +9,8 @@ import {GeolocationService} from '@app/shared/services/geolocation.service';
 export class WidgetComponent implements OnInit {
   public lat: string;
   public lon: string;
+  public formSuccess: boolean;
+  public formError: boolean;
   constructor(
     private geolocationService: GeolocationService
   ) { }
@@ -22,6 +24,15 @@ export class WidgetComponent implements OnInit {
           console.log('lon' + this.lon);
         }
       );
+  }
+  public onSuccess(value) {
+    if (value) {
+      this.formSuccess = true;
+      setTimeout(() => this.formSuccess = false, 3000);
+      return;
+    }
+    this.formError = true;
+    setTimeout(() => this.formError = false, 3000);
   }
 
 }

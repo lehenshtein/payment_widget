@@ -47,6 +47,9 @@ export class CountrySelectorComponent implements OnInit, ControlValueAccessor {
         }
       );
   }
+  public onSelect(country) {
+    this.data.changeMessage(country.value);
+  }
   public onTouched: () => void = () => {};
 
   writeValue(val: any) {
@@ -54,7 +57,6 @@ export class CountrySelectorComponent implements OnInit, ControlValueAccessor {
   }
   registerOnChange (fn: (value: any) => void) {
     this.formCountries.valueChanges.subscribe((data) => {
-      this.data.changeMessage(data.countries);
     });
   }
   registerOnTouched (fn: () => void) {

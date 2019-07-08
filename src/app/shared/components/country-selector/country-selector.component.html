@@ -1,7 +1,7 @@
 <ng-container [formGroup]="formCountries">
 <mat-form-field>
   <mat-label>Select country</mat-label>
-  <mat-select formControlName="countries">
+  <mat-select formControlName="countries" (selectionChange)="onSelect($event)">
     <mat-option *ngFor="let country of countriesList" [value]="country.code">
       {{country.name}}
     </mat-option>
