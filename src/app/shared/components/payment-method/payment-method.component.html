@@ -2,10 +2,8 @@
   <mat-radio-group
     *ngIf="paymentMethods"
     formControlName="method"
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
     >
-    <mat-radio-button [checked]="i === 0" class="example-radio-button" *ngFor="let method of paymentMethods; let i = index" [value]="method.id">
+    <mat-radio-button [checked]="i === 0" class="method-radio-button" *ngFor="let method of paymentMethods; let i = index" [value]="method.id">
       {{method.name}}
       <img class="method-logo" src="{{method.img_url}}" alt="{{method.id}}">
     </mat-radio-button>
